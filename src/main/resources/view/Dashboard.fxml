@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serenity.controllers.DashboardController">
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #3498db;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+            <children>
+                <Label text="Serenity Mental Health Therapy Center" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Pane HBox.hgrow="ALWAYS" />
+                <Label fx:id="userRoleLabel" text="Role: Admin" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="usernameLabel" text="Username: admin" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #e74c3c;" text="Logout" textFill="WHITE" />
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="5" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <children>
+                <Label text="NAVIGATION" textFill="#7f8c8d">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10" />
+                    </padding>
+                </Label>
+                <Button fx:id="dashboardBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleDashboard" style="-fx-background-color: #34495e;" text="Dashboard" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets bottom="5" />
+                    </VBox.margin>
+                </Button>
+
+                <!-- Admin-only buttons -->
+                <TitledPane fx:id="adminSection" expanded="false" style="-fx-background-color: #2c3e50;" text="Admin Controls" textFill="WHITE">
+                    <content>
+                        <VBox spacing="5">
+                            <Button fx:id="therapistManagementBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleTherapistManagement" style="-fx-background-color: #34495e;" text="Therapist Management" textFill="WHITE" />
+                            <Button fx:id="programManagementBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleProgramManagement" style="-fx-background-color: #34495e;" text="Program Management" textFill="WHITE" />
+                            <Button fx:id="userManagementBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleUserManagement" style="-fx-background-color: #34495e;" text="User Management" textFill="WHITE" />
+                            <Button fx:id="adminReportsBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleAdminReports" style="-fx-background-color: #34495e;" text="Admin Reports" textFill="WHITE" />
+                        </VBox>
+                    </content>
+                </TitledPane>
+
+                <!-- Common buttons -->
+                <TitledPane expanded="false" style="-fx-background-color: #2c3e50;" text="Patient Management" textFill="WHITE">
+                    <content>
+                        <VBox spacing="5">
+                            <Button fx:id="patientRegistrationBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handlePatientRegistration" style="-fx-background-color: #34495e;" text="Patient Registration" textFill="WHITE" />
+                            <Button fx:id="patientListBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handlePatientList" style="-fx-background-color: #34495e;" text="Patient List" textFill="WHITE" />
+                            <Button fx:id="medicalRecordsBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleMedicalRecords" style="-fx-background-color: #34495e;" text="Medical Records" textFill="WHITE" />
+                        </VBox>
+                    </content>
+                </TitledPane>
+
+                <TitledPane expanded="false" style="-fx-background-color: #2c3e50;" text="Therapy Sessions" textFill="WHITE">
+                    <content>
+                        <VBox spacing="5">
+                            <Button fx:id="scheduleSessionBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleScheduleSession" style="-fx-background-color: #34495e;" text="Schedule Session" textFill="WHITE" />
+                            <Button fx:id="sessionCalendarBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSessionCalendar" style="-fx-background-color: #34495e;" text="Session Calendar" textFill="WHITE" />
+                            <Button fx:id="sessionHistoryBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSessionHistory" style="-fx-background-color: #34495e;" text="Session History" textFill="WHITE" />
+                        </VBox>
+                    </content>
+                </TitledPane>
+
+                <TitledPane expanded="false" style="-fx-background-color: #2c3e50;" text="Payments" textFill="WHITE">
+                    <content>
+                        <VBox spacing="5">
+                            <Button fx:id="newPaymentBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleNewPayment" style="-fx-background-color: #34495e;" text="New Payment" textFill="WHITE" />
+                            <Button fx:id="paymentHistoryBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handlePaymentHistory" style="-fx-background-color: #34495e;" text="Payment History" textFill="WHITE" />
+                            <Button fx:id="invoicesBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleInvoices" style="-fx-background-color: #34495e;" text="Invoices" textFill="WHITE" />
+                        </VBox>
+                    </content>
+                </TitledPane>
+
+                <Button fx:id="reportsBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleReports" style="-fx-background-color: #34495e;" text="Reports" textFill="WHITE" />
+                <Button fx:id="settingsBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSettings" style="-fx-background-color: #34495e;" text="Settings" textFill="WHITE" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Default dashboard content -->
+                <AnchorPane fx:id="dashboardPane">
+                    <children>
+                        <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Dashboard" />
+
+                            <HBox spacing="15">
+                                <VBox style="-fx-background-color: #3498db; -fx-padding: 15px; -fx-background-radius: 5px;" styleClass="dashboard-card">
+                                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Patients" textFill="WHITE" />
+                                    <Label fx:id="patientCountLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="3000" textFill="WHITE" />
+                                    <Label text="Total Registered" textFill="WHITE" />
+                                </VBox>
+
+                                <VBox style="-fx-background-color: #2ecc71; -fx-padding: 15px; -fx-background-radius: 5px;" styleClass="dashboard-card">
+                                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Therapy Programs" textFill="WHITE" />
+                                    <Label fx:id="programCountLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="5" textFill="WHITE" />
+                                    <Label text="Active Programs" textFill="WHITE" />
+                                </VBox>
+
+                                <VBox style="-fx-background-color: #9b59b6; -fx-padding: 15px; -fx-background-radius: 5px;" styleClass="dashboard-card">
+                                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Therapists" textFill="WHITE" />
+                                    <Label fx:id="therapistCountLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="12" textFill="WHITE" />
+                                    <Label text="Active Therapists" textFill="WHITE" />
+                                </VBox>
+
+                                <VBox style="-fx-background-color: #e74c3c; -fx-padding: 15px; -fx-background-radius: 5px;" styleClass="dashboard-card">
+                                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Sessions" textFill="WHITE" />
+                                    <Label fx:id="sessionCountLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="45" textFill="WHITE" />
+                                    <Label text="Sessions Today" textFill="WHITE" />
+                                </VBox>
+                            </HBox>
+
+                            <HBox spacing="15" />
+
+                            <HBox spacing="15" />
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+    </center>
+    <bottom>
+        <HBox spacing="10" style="-fx-background-color: #ecf0f1;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <children>
+                <Label text="© 2025 Serenity Mental Health Therapy Center" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Label fx:id="timeLabel" text="Last updated: 15:30:45" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
