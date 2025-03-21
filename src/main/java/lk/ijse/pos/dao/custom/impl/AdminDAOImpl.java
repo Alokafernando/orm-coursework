@@ -6,6 +6,7 @@ import lk.ijse.pos.entity.Admin;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdminDAOImpl implements AdminDAO {
@@ -13,7 +14,7 @@ public class AdminDAOImpl implements AdminDAO {
     private static FactoryConfiguration factory;
     private Session session;
 
-    public AdminDAOImpl() {
+    public AdminDAOImpl() throws IOException {
         if (factory == null) {
             factory = FactoryConfiguration.getInstance();
         }

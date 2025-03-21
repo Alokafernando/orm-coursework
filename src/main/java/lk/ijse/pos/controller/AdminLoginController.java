@@ -53,6 +53,9 @@ public class AdminLoginController {
 
     private final AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOType.ADMIN);
 
+    public AdminLoginController() throws IOException {
+    }
+
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {
         String username = txtUsername.getText();

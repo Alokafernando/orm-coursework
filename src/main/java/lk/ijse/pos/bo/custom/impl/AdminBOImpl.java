@@ -8,11 +8,15 @@ import lk.ijse.pos.entity.Admin;
 import lk.ijse.pos.model.AdminDTO;
 import org.hibernate.Session;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdminBOImpl implements AdminBO {
 
     private final AdminDAO adminDAO = (AdminDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.ADMIN);
+
+    public AdminBOImpl() throws IOException {
+    }
 
     @Override
     public List<AdminDTO> getAll() {
@@ -20,7 +24,7 @@ public class AdminBOImpl implements AdminBO {
     }
 
     @Override
-    public boolean save(AdminDTO adminDTO) {
+    public boolean save(AdminDTO adminDTO) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         adminDAO.setSession(session);
         return adminDAO.save(new Admin(adminDTO.getUsername(), adminDTO.getPassword()));
@@ -42,7 +46,7 @@ public class AdminBOImpl implements AdminBO {
     }
 
     @Override
-    public AdminDTO findCredential(String text) {
+    public AdminDTO findCredential(String text) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         adminDAO.setSession(session);
         Admin admin = adminDAO.find(text);

@@ -3,6 +3,8 @@ package lk.ijse.pos.dao;
 
 import lk.ijse.pos.dao.custom.impl.AdminDAOImpl;
 
+import java.io.IOException;
+
 public class DAOFactory {
     private static DAOFactory daoFactory;
     private DAOFactory() {
@@ -17,7 +19,7 @@ public class DAOFactory {
     public enum DAOType {
         ADMIN;
     }
-    public SuperDAO getDAO(DAOType type) {
+    public SuperDAO getDAO(DAOType type) throws IOException {
         switch (type) {
             case ADMIN:
                 return new AdminDAOImpl();

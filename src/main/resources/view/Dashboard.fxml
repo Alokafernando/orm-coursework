@@ -29,7 +29,7 @@
                <Insets bottom="5" left="15" right="15" top="5" />
             </padding>
             <Label text="Welcome, Admin" />
-            <Button text="Logout" />
+            <Button style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Logout" />
          </HBox>
       </VBox>
    </top>
@@ -80,7 +80,7 @@
    </left>
 
    <center>
-      <ScrollPane fitToWidth="true">
+      <ScrollPane fitToWidth="true" prefHeight="456.0" prefWidth="650.0">
          <VBox spacing="15">
             <padding>
                <Insets bottom="20" left="20" right="20" top="20" />
@@ -167,50 +167,6 @@
                   <TableColumn prefWidth="100.0" text="Amount" />
                </columns>
             </TableView>
-
-            <!-- Quick Actions Section -->
-            <Label style="-fx-font-weight: bold;" text="Quick Actions">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-
-            <HBox spacing="10">
-               <Button prefWidth="120" text="New Patient" />
-               <Button prefWidth="120" text="Schedule Session" />
-               <Button prefWidth="120" text="Process Payment" />
-            </HBox>
-
-            <!-- Reports Section -->
-            <Label style="-fx-font-weight: bold;" text="Analytics">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-
-            <HBox spacing="10">
-               <VBox prefHeight="150" prefWidth="200" style="-fx-background-color: #F5F7FA;">
-                  <padding>
-                     <Insets bottom="10" left="10" right="10" top="10" />
-                  </padding>
-                  <Label style="-fx-font-weight: bold;" text="Popular Programs" />
-                  <VBox prefHeight="120">
-                     <!-- This would be a chart in a real application -->
-                     <Label text="Program data visualization placeholder" />
-                  </VBox>
-               </VBox>
-
-               <VBox prefHeight="150" prefWidth="200" style="-fx-background-color: #F5F7FA;">
-                  <padding>
-                     <Insets bottom="10" left="10" right="10" top="10" />
-                  </padding>
-                  <Label style="-fx-font-weight: bold;" text="Monthly Revenue" />
-                  <VBox prefHeight="120">
-                     <!-- This would be a chart in a real application -->
-                     <Label text="Revenue data visualization placeholder" />
-                  </VBox>
-               </VBox>
-            </HBox>
 
          </VBox>
       </ScrollPane>
