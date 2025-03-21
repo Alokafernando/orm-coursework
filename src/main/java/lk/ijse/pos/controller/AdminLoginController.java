@@ -64,7 +64,7 @@ public class AdminLoginController {
         AdminDTO adminDTO = adminBO.findCredential(username);
 
         if (adminDTO != null && username.equals(adminDTO.getUsername()) && password.equals(adminDTO.getPassword())) {
-            loadScene(event, "/view/test.fxml");
+            loadScene(event, "/view/Dashboard.fxml");
         } else {
             lblError.setText("Invalid credentials. Please try again.");
             lblError.setVisible(true);
