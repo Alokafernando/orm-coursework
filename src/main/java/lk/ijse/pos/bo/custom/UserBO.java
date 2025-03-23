@@ -20,4 +20,6 @@ public interface UserBO extends SuperBO {
     void delete(String id);
 
     UserDTO findCredential(String text) throws IOException;
+
+    boolean status();
 }

@@ -66,4 +66,10 @@ public class UserBOImpl implements UserBO {
             return null;
         }
     }
+
+    @Override
+    public boolean status() {
+        boolean isUser = true;
+        return isUser;
+    }
 }
