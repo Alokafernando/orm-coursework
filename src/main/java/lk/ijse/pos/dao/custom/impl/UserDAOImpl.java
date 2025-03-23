@@ -1,35 +1,34 @@
 package lk.ijse.pos.dao.custom.impl;
 
 import lk.ijse.pos.config.FactoryConfiguration;
-import lk.ijse.pos.dao.custom.AdminDAO;
-import lk.ijse.pos.entity.Admin;
+import lk.ijse.pos.dao.custom.UserDAO;
+import lk.ijse.pos.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.util.List;
 
-public class AdminDAOImpl implements AdminDAO {
+public class UserDAOImpl implements UserDAO {
 
     private static FactoryConfiguration factory;
     private Session session;
 
-    public AdminDAOImpl() throws IOException {
-
-            factory = FactoryConfiguration.getInstance();
+    public UserDAOImpl() throws IOException {
+        factory = FactoryConfiguration.getInstance();
     }
 
     @Override
-    public List<Admin> getAll() {
+    public List<User> getAll() {
         return List.of();
     }
 
     @Override
-    public boolean save(Admin entity) {
-        session = factory.getSession();  // Use the initialized session
+    public boolean save(User receptionist) {
+        session = factory.getSession();
         try {
             Transaction transaction = session.beginTransaction();
-            session.save(entity);
+            session.save(receptionist);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -43,33 +42,33 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public Admin find(String name) {
+    public User find(String name) {
         session = factory.getSession();
-        Admin admin = session.get(Admin.class, name);
-        return admin;
+        User receptionist = session.get(User.class, name);
+        return receptionist;
     }
 
     @Override
-    public boolean update(Admin entity) {
+    public boolean update(User entity) {
         session = factory.getSession();
         try {
-            Admin admin = session.get(Admin.class, entity);
+            User receptionist = session.get(User.class, entity);
             Transaction transaction = session.beginTransaction();
 
-            admin.setUsername(entity.getUsername());
-            admin.setPassword(entity.getPassword());
+            receptionist.setUsername(entity.getUsername());
+            receptionist.setPassword(entity.getPassword());
 
             transaction.commit();
-            return admin!=null;
+            return receptionist != null;
         } catch (Exception e) {
-            System.out.println("Customer update failed");
+            System.out.println("Receptionist update failed");
             return false;
         }
     }
 
     @Override
     public void delete(String id) {
-        // Implement the delete method here
+
     }
 
     @Override

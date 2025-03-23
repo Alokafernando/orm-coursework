@@ -13,7 +13,7 @@ public interface AdminBO extends SuperBO {
 
     AdminDTO find(String text);
 
-    void update(String text);
+    boolean update(AdminDTO adminDTO) throws IOException;
 
     void delete(String id);
 

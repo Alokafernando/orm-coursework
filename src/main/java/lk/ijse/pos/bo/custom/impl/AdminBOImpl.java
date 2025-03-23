@@ -13,10 +13,11 @@ import java.util.List;
 
 public class AdminBOImpl implements AdminBO {
 
-    private final AdminDAO adminDAO = (AdminDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.ADMIN);
+     AdminDAO adminDAO = (AdminDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.ADMIN);
 
     public AdminBOImpl() throws IOException {
     }
+
 
     @Override
     public List<AdminDTO> getAll() {
@@ -36,8 +37,10 @@ public class AdminBOImpl implements AdminBO {
     }
 
     @Override
-    public void update(String text) {
-
+    public boolean update(AdminDTO adminDTO) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        adminDAO.setSession(session);
+        return adminDAO.update(new Admin(adminDTO.getUsername(), adminDTO.getPassword()));
     }
 
     @Override

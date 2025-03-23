@@ -11,7 +11,7 @@ public interface CrudDAO<T> extends SuperDAO {
 
     T find(String text);
 
-    void update(String text, T entity);
+    boolean update(T entity);
 
     void delete(String id);
 
