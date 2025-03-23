@@ -2,19 +2,26 @@ package lk.ijse.pos.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.pos.bo.BOFactory;
+import lk.ijse.pos.bo.custom.UserBO;
 
-public class SettingControler {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SettingControler implements Initializable {
 
     @FXML
     private Button PasswordVisibilityBtn;
 
     @FXML
     private Button addUserBtn;
+
+    @FXML
+    private Tab adminSettings;
 
     @FXML
     private Button clearFormBtn;
@@ -80,10 +87,23 @@ public class SettingControler {
     private Label userSearchStatusLabel;
 
     @FXML
+    private Tab userSettings;
+
+    @FXML
     private TextField userUsernameField;
 
     @FXML
     private Label usernameErrorLabel;
+
+    UserBO userBo = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOType.USER);
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        blockTabs();
+    }
+
+    public SettingControler() throws IOException {
+    }
 
     @FXML
     void PasswordVisibility(ActionEvent event) {
@@ -123,6 +143,18 @@ public class SettingControler {
     @FXML
     void updateUser(ActionEvent event) {
 
+    }
+
+    private void blockTabs(){
+        boolean status = userBo.status();
+        if(status == true){
+            adminSettings.setDisable(true);
+            if (adminSettings.isSelected()){
+                new Alert(Alert.AlertType.ERROR, "user can't access to admin settings", ButtonType.OK).show();
+            }
+        }else {
+            adminSettings.setDisable(false);
+        }
     }
 
 }
