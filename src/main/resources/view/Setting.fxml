@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serenity.controllers.AdminSettingsController">
+<AnchorPane fx:id="settingPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SettingControler">
     <children>
         <VBox layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -63,7 +63,7 @@
                                                     <children>
                                                         <Label prefWidth="120.0" text="New Password:" />
                                                         <PasswordField fx:id="newPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Enter new password" />
-                                                        <Button fx:id="togglePasswordBtn" mnemonicParsing="false" onAction="#togglePasswordVisibility" text="Show" />
+                                                        <Button fx:id="PasswordVisibilityBtn" mnemonicParsing="false" onAction="#PasswordVisibility" text="Show" />
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="186.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
@@ -86,50 +86,6 @@
                                         </VBox>
                                     </children>
                                 </AnchorPane>
-                            </content>
-                        </Tab>
-                        <Tab text="System Settings">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox layoutX="181.0" layoutY="73.0" prefHeight="407.0" prefWidth="760.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <Label text="System Configuration">
-                                                    <font>
-                                                        <Font name="System Bold" size="16.0" />
-                                                    </font>
-                                                </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
-                                                    <children>
-                                                        <Label prefWidth="180.0" text="Session Timeout (minutes):" />
-                                                        <TextField fx:id="sessionTimeoutField" prefHeight="25.0" prefWidth="100.0" promptText="30" />
-                                                    </children>
-                                                </HBox>
-                                                <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="76.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
-                                                    <children>
-                                                        <Label prefWidth="180.0" text="Max Failed Login Attempts:" />
-                                                        <TextField fx:id="maxLoginAttemptsField" prefHeight="25.0" prefWidth="100.0" promptText="5" />
-                                                    </children>
-                                                </HBox>
-                                                <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="116.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
-                                                    <children>
-                                                        <Label prefWidth="180.0" text="Enable Audit Logging:" />
-                                                        <Button fx:id="auditLoggingToggleBtn" mnemonicParsing="false" onAction="#toggleAuditLogging" prefWidth="100.0" text="Enabled" />
-                                                    </children>
-                                                </HBox>
-                                                <Separator prefWidth="200.0" />
-                                                <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
-                                                    <children>
-                                                        <Button fx:id="saveSettingsBtn" mnemonicParsing="false" onAction="#saveSystemSettings" prefWidth="120.0" text="Save Settings" />
-                                                        <Label fx:id="settingsStatusLabel" />
-                                                    </children>
-                                                </HBox>
-                                            </children>
-                                            <padding>
-                                                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
-                                            </padding>
-                                        </VBox>
-                                    </children></AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="User Management">
