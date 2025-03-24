@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface AdminDAO extends CrudDAO<Admin> {
     List<String> getAdminNames();
+    List<String> getAdminPasswords();
+    boolean updateUsername(String currentUsername, String newUsername);
+    boolean updatePassword(String currentUsername, String currentPassword, String newPassword);
 }

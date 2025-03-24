@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -42,7 +43,10 @@
                                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
                                                         <Label prefWidth="120.0" text="Current Username:" />
-                                                        <TextField fx:id="currentUsernameField" editable="false" onAction="#showCurrentAdminUsername" prefHeight="25.0" prefWidth="250.0" />
+                                                        <TextField fx:id="currentUsernameField" alignment="CENTER" editable="false" onAction="#showCurrentAdminUsername" prefHeight="25.0" prefWidth="250.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font></TextField>
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="66.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
@@ -52,6 +56,15 @@
                                                         <Label fx:id="usernameErrorLabel" textFill="RED" />
                                                     </children>
                                                 </HBox>
+                                    <HBox alignment="CENTER_RIGHT" layoutX="30.0" layoutY="365.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Button fx:id="updateUserNameBtn1" mnemonicParsing="false" onAction="#updateUsername" prefWidth="120.0" text="Update Username" />
+                                          <Label fx:id="credentialsStatusLabel1" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets right="200.0" />
+                                       </VBox.margin>
+                                    </HBox>
                                                 <Separator prefWidth="200.0" />
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
@@ -62,22 +75,35 @@
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="146.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
                                                         <Label prefWidth="120.0" text="New Password:" />
-                                                        <PasswordField fx:id="newPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Enter new password" />
+                                          <StackPane prefHeight="40.0" prefWidth="250.0">
+                                             <children>
+                                                              <PasswordField fx:id="newPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Enter new password" />
+                                                <TextField fx:id="txtNewPasswordText" promptText="Enter new password" />
+                                             </children>
+                                          </StackPane>
                                                         <Button fx:id="PasswordVisibilityBtn" mnemonicParsing="false" onAction="#PasswordVisibility" text="Show" />
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="186.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
                                                         <Label prefWidth="120.0" text="Confirm Password:" />
-                                                        <PasswordField fx:id="confirmPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Confirm new password" />
+                                          <StackPane prefHeight="40.0" prefWidth="250.0">
+                                             <children>
+                                                              <PasswordField fx:id="confirmPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Confirm new password" />
+                                                <TextField fx:id="txtConfirmPasswordText" promptText="Confirm new password" />
+                                             </children>
+                                          </StackPane>
                                                         <Label fx:id="passwordErrorLabel" textFill="RED" />
                                                     </children>
                                                 </HBox>
-                                                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="226.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                                                <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="226.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
-                                                        <Button fx:id="updateCredentialsBtn" mnemonicParsing="false" onAction="#updateCredentials" prefWidth="120.0" text="Update Credentials" />
+                                                        <Button fx:id="updatePasswordBtn" mnemonicParsing="false" onAction="#updatePassword" prefWidth="120.0" text="Update Password" />
                                                         <Label fx:id="credentialsStatusLabel" />
                                                     </children>
+                                       <VBox.margin>
+                                          <Insets right="200.0" />
+                                       </VBox.margin>
                                                 </HBox>
                                             </children>
                                             <padding>

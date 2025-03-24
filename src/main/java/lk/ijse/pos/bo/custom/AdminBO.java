@@ -21,4 +21,10 @@ public interface AdminBO extends SuperBO {
     AdminDTO findCredential(String text) throws IOException;
 
     List<String> getAdminNames() throws IOException;
+
+    List<String> getAdminPasswords() throws IOException;
+
+    boolean updateUsername(String currentUsername, String newUsername) throws IOException;
+
+    boolean updatePassword(String currentUsername, String currentPassword, String newPassword) throws IOException;
 }

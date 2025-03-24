@@ -13,27 +13,147 @@ import java.util.List;
 
 public class AdminDAOImpl implements AdminDAO {
 
-    private static FactoryConfiguration factory;
-    private Session session;
+     FactoryConfiguration factory = FactoryConfiguration.getInstance();
 
     public AdminDAOImpl() throws IOException {
-
-            factory = FactoryConfiguration.getInstance();
     }
 
     @Override
     public List<Admin> getAll() {
-        return List.of();
+        List<Admin> adminList = new ArrayList<>();
+        try (Session session = factory.getSession()) {
+            Query<Admin> query = session.createQuery("FROM Admin", Admin.class);
+            adminList = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return adminList;
     }
 
     @Override
     public boolean save(Admin entity) {
-        session = factory.getSession();  // Use the initialized session
-        try {
+        try (Session session = factory.getSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
             return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Admin find(String name) {
+        try (Session session = factory.getSession()) {
+            return session.createQuery("FROM Admin WHERE username = :username", Admin.class)
+                    .setParameter("username", name)
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean update(Admin entity) {
+        try (Session session = factory.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Admin existingAdmin = session.get(Admin.class, entity.getUsername()); // Fetch by ID or username
+
+            if (existingAdmin != null) {
+                existingAdmin.setPassword(entity.getPassword());
+                session.update(existingAdmin);
+                transaction.commit();
+                return true;
+            } else {
+                System.out.println("Admin not found for update.");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public void delete(String username) {
+        try (Session session = factory.getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Admin admin = session.get(Admin.class, username);
+            if (admin != null) {
+                session.delete(admin);
+                transaction.commit();
+            } else {
+                System.out.println("Admin not found for deletion.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setSession(Session session) {
+        // This method should only be used if session management is externally controlled
+    }
+
+    @Override
+    public List<String> getAdminNames() {
+        List<String> adminNames = new ArrayList<>();
+        try (Session session = factory.getSession()) {
+            Query<String> query = session.createQuery("SELECT a.username FROM Admin a", String.class);
+            adminNames = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return adminNames;
+    }
+
+    @Override
+    public List<String> getAdminPasswords() {
+        List<String> adminPasswords = new ArrayList<>();
+        try (Session session = factory.getSession()) {
+            Query<String> query = session.createQuery("SELECT a.password FROM Admin a", String.class);
+            adminPasswords = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return adminPasswords;
+    }
+
+    @Override
+    public boolean updateUsername(String currentUsername, String newUsername) {
+        try (Session session = factory.getSession()) {
+            Admin admin = session.createQuery("FROM Admin WHERE username = :username", Admin.class)
+                    .setParameter("username", currentUsername)
+                    .uniqueResult();
+
+            if (admin != null) {
+                Transaction transaction = session.beginTransaction();
+                admin.setUsername(newUsername);
+                session.update(admin);
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updatePassword(String currentUsername, String currentPassword, String newPassword) {
+        Session session = factory.getSession();
+        try {
+            Admin admin = session.get(Admin.class, currentUsername);
+            if (admin != null && admin.getPassword().equals(currentPassword)) {
+                Transaction transaction = session.beginTransaction();
+                admin.setPassword(newPassword);
+                transaction.commit();
+                return true;
+            }
+            return false;  // Return false if the password is incorrect.
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -43,58 +163,6 @@ public class AdminDAOImpl implements AdminDAO {
             }
         }
     }
-
-    @Override
-    public Admin find(String name) {
-        session = factory.getSession();
-        Admin admin = session.get(Admin.class, name);
-        return admin;
-    }
-
-    @Override
-    public boolean update(Admin entity) {
-        session = factory.getSession();
-        try {
-            Admin admin = session.get(Admin.class, entity);
-            Transaction transaction = session.beginTransaction();
-
-            admin.setUsername(entity.getUsername());
-            admin.setPassword(entity.getPassword());
-
-            transaction.commit();
-            return admin!=null;
-        } catch (Exception e) {
-            System.out.println("Customer update failed");
-            return false;
-        }
-    }
-
-    @Override
-    public void delete(String id) {
-        // Implement the delete method here
-    }
-
-    @Override
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    @Override
-    public List<String> getAdminNames() {
-        session = factory.getSession();
-        List<String> adminNames;
-        try {
-            Query<String> query = session.createQuery("SELECT a.username FROM Admin a", String.class);
-            adminNames = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            adminNames = new ArrayList<>();
-        } finally {
-            session.close();
-        }
-        return adminNames;
-    }
-
 
 
 }
