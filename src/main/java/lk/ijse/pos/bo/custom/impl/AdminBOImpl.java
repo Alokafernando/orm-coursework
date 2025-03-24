@@ -9,6 +9,7 @@ import lk.ijse.pos.model.AdminDTO;
 import org.hibernate.Session;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminBOImpl implements AdminBO {
@@ -61,5 +62,17 @@ public class AdminBOImpl implements AdminBO {
         }else {
             return null;
         }
+    }
+
+    @Override
+    public List<String> getAdminNames() throws IOException {
+        List<String> adminNames = new ArrayList<>();
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            adminDAO.setSession(session);
+            adminNames = adminDAO.getAdminNames();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return adminNames;
     }
 }

@@ -42,7 +42,7 @@
                                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
                                                     <children>
                                                         <Label prefWidth="120.0" text="Current Username:" />
-                                                        <TextField fx:id="currentUsernameField" editable="false" prefHeight="25.0" prefWidth="250.0" />
+                                                        <TextField fx:id="currentUsernameField" editable="false" onAction="#showCurrentAdminUsername" prefHeight="25.0" prefWidth="250.0" />
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="66.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0">

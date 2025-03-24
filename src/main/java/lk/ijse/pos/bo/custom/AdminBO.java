@@ -4,6 +4,7 @@ import lk.ijse.pos.bo.SuperBO;
 import lk.ijse.pos.model.AdminDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface AdminBO extends SuperBO {
@@ -18,4 +19,6 @@ public interface AdminBO extends SuperBO {
     void delete(String id);
 
     AdminDTO findCredential(String text) throws IOException;
+
+    List<String> getAdminNames() throws IOException;
 }
