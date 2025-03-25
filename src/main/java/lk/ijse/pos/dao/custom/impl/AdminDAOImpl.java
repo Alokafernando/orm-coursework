@@ -145,23 +145,30 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public boolean updatePassword(String currentUsername, String currentPassword, String newPassword) {
         Session session = factory.getSession();
+        Transaction transaction = null;
         try {
-            Admin admin = session.get(Admin.class, currentUsername);
+            transaction = session.beginTransaction();
+
+            Query<Admin> query = session.createQuery("FROM Admin WHERE username = :username", Admin.class);
+            query.setParameter("username", currentUsername);
+            Admin admin = query.uniqueResult();
+
             if (admin != null && admin.getPassword().equals(currentPassword)) {
-                Transaction transaction = session.beginTransaction();
                 admin.setPassword(newPassword);
+                session.update(admin);
                 transaction.commit();
                 return true;
             }
-            return false;  // Return false if the password is incorrect.
+
+            return false;
         } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
             return false;
         } finally {
-            if (session != null) {
-                session.close();
-            }
+            if (session != null) session.close();
         }
+
     }
 
 

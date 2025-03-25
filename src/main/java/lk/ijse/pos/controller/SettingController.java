@@ -127,9 +127,12 @@ public class SettingController implements Initializable  {
         showCurrentUserName();
         newUsernameField.setText("");
 
+        txtNewPasswordText.setVisible(false);
+       txtConfirmPasswordText.setVisible(false);
 
-        txtNewPasswordText.setVisible(true);
-        txtConfirmPasswordText.setVisible(true);
+        currentPasswordField.setText("");
+        newPasswordField.setText("");
+        confirmPasswordField.setText("");
     }
 
     private void showCurrentUserName() {
@@ -148,6 +151,7 @@ public class SettingController implements Initializable  {
 
     @FXML
     void PasswordVisibility(ActionEvent event) {
+
 
         if (newPasswordField.isVisible() || confirmPasswordField.isVisible()) {
             newPasswordField.setVisible(false);
@@ -206,10 +210,12 @@ public class SettingController implements Initializable  {
 
     @FXML
     void updatePassword(ActionEvent event) throws IOException {
+
         String currentUsername = currentUsernameField.getText();
-        String currentPassword = confirmPasswordField.getText();
-        String newPassword = txtNewPasswordText.getText();
-        String confirmPassword = txtConfirmPasswordText.getText();
+        String currentPassword = currentPasswordField.getText();
+
+        String newPassword = newPasswordField.isVisible() ? newPasswordField.getText() : txtNewPasswordText.getText();
+        String confirmPassword = confirmPasswordField.isVisible() ? confirmPasswordField.getText() : txtConfirmPasswordText.getText();
 
         if (!validatePasswordFields(currentUsername, currentPassword, newPassword, confirmPassword)) {
             return;
@@ -218,9 +224,9 @@ public class SettingController implements Initializable  {
         boolean isUpdated = adminBO.updatePassword(currentUsername, currentPassword, newPassword);
         if (isUpdated) {
             refreshPage();
-            usernameErrorLabel.setText("Password Updated Successfully!");
+            passwordErrorLabel.setText("Password Updated Successfully!");
         } else {
-            usernameErrorLabel.setText("Failed to Update Password!");
+            passwordErrorLabel.setText("Failed to Update Password!");
         }
 
     }
@@ -228,6 +234,10 @@ public class SettingController implements Initializable  {
     private boolean validatePasswordFields(String username, String currentPassword, String newPassword, String confirmPassword) {
         String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
+        if (username.isEmpty()) {
+            usernameErrorLabel.setText("Username cannot be empty!");
+            return false;
+        }
         if (currentPassword.isEmpty()) {
             passwordErrorLabel.setText("Current password is empty!");
             return false;
