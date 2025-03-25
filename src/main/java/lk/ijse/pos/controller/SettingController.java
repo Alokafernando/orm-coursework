@@ -14,6 +14,7 @@ import lk.ijse.pos.model.UserDTO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SettingController implements Initializable  {
@@ -220,7 +221,18 @@ public class SettingController implements Initializable  {
 
     @FXML
     void deleteUser(ActionEvent event) {
-        // Logic to delete a user
+        String userId = userIdField.getText().trim();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+
+        if (optionalButtonType.get() == ButtonType.YES) {
+            userBO.delete(userId);
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Successfully deleted!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Deletion failed!").show();
+        }
     }
 
     @FXML

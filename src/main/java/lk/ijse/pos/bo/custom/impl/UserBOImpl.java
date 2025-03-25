@@ -16,8 +16,8 @@ import java.util.List;
 
 public class UserBOImpl implements UserBO {
 
-
     UserDAO userDAO = (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.USER);
+    Session session = FactoryConfiguration.getInstance().getSession();
 
     public UserBOImpl() throws IOException {
     }
@@ -42,7 +42,6 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean save(UserDTO receptionistDTO) throws IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
         return  userDAO.save(new User(receptionistDTO.getUserId(), receptionistDTO.getUsername(), receptionistDTO.getPassword()));
     }
@@ -54,7 +53,6 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean update(UserDTO userDTO) throws IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
         return userDAO.update(new User(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword()));
     }
@@ -62,12 +60,12 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public void delete(String id) {
-
+        userDAO.setSession(session);
+        userDAO.delete(id);
     }
 
     @Override
     public UserDTO findCredential(String text) throws IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
         User user = userDAO.find(text);
         if (user !=null){

@@ -53,22 +53,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User entity) {
-//        session = factory.getSession();
-//        try {
-//            User receptionist = session.get(User.class, entity);
-//            Transaction transaction = session.beginTransaction();
-//
-//            receptionist.setUserId(entity.getUserId());
-//            receptionist.setUsername(entity.getUsername());
-//            receptionist.setPassword(entity.getPassword());
-//
-//            transaction.commit();
-//            return receptionist != null;
-//        } catch (Exception e) {
-//            System.out.println("Receptionist update failed");
-//            return false;
-//        }
-
         session = factory.getSession();
         Transaction transaction = null;
 
@@ -102,7 +86,28 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(String id) {
+        Session session = factory.getSession();
+        Transaction transaction = null;
 
+        try {
+            transaction = session.beginTransaction();
+
+            User user = session.get(User.class, id);
+            if (user != null) {
+                session.delete(user);
+                transaction.commit();
+                System.out.println("User deleted successfully!");
+            } else {
+                System.out.println("User not found!");
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.out.println("User deletion failed: " + e.getMessage());
+        } finally {
+            session.close();
+        }
     }
 
     @Override
