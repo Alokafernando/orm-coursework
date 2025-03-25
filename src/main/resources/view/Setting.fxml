@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="settingPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SettingControler">
+<AnchorPane fx:id="settingPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.SettingController">
     <children>
         <VBox layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="800.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -78,7 +78,7 @@
                                           <StackPane prefHeight="40.0" prefWidth="250.0">
                                              <children>
                                                               <PasswordField fx:id="newPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Enter new password" />
-                                                <TextField fx:id="txtNewPasswordText" promptText="Enter new password" />
+                                                <TextField fx:id="txtNewPasswordText" promptText="Enter new password" style="-fx-background-color: transparent;" />
                                              </children>
                                           </StackPane>
                                                         <Button fx:id="PasswordVisibilityBtn" mnemonicParsing="false" onAction="#PasswordVisibility" text="Show" />
@@ -90,7 +90,7 @@
                                           <StackPane prefHeight="40.0" prefWidth="250.0">
                                              <children>
                                                               <PasswordField fx:id="confirmPasswordField" prefHeight="25.0" prefWidth="250.0" promptText="Confirm new password" />
-                                                <TextField fx:id="txtConfirmPasswordText" promptText="Confirm new password" />
+                                                <TextField fx:id="txtConfirmPasswordText" promptText="Confirm new password" style="-fx-background-color: transparent;" />
                                              </children>
                                           </StackPane>
                                                         <Label fx:id="passwordErrorLabel" textFill="RED" />
