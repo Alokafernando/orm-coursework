@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.pos.bo.BOFactory;
 import lk.ijse.pos.bo.custom.AdminBO;
+import lk.ijse.pos.bo.custom.UserBO;
+import lk.ijse.pos.model.UserDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,11 +22,13 @@ public class SettingController implements Initializable  {
     private Button PasswordVisibilityBtn;
 
     @FXML
+    private TextField UserPasswordTextField;
+
+    @FXML
     private Button addUserBtn;
 
     @FXML
     private Tab adminSettings;
-
 
     @FXML
     private PasswordField confirmPasswordField;
@@ -98,7 +102,9 @@ public class SettingController implements Initializable  {
     @FXML
     private Label usernameErrorLabel;
 
+
     private final AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOType.ADMIN);
+    private final UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOType.USER);
 
     public SettingController() throws IOException {
     }
@@ -126,6 +132,12 @@ public class SettingController implements Initializable  {
 
         usernameErrorLabel.setText("");
         passwordErrorLabel.setText("");
+
+        userIdField.setText("");
+
+        userUsernameField.setText("");
+        UserPasswordTextField.setVisible(false);
+        userPasswordField.setText("");
     }
 
     private void showCurrentUserName() {
@@ -167,8 +179,42 @@ public class SettingController implements Initializable  {
     }
 
     @FXML
-    void addUser(ActionEvent event) {
-        // Add logic to add a new user
+    void addUser(ActionEvent event) throws IOException {
+
+        String userId = userIdField.getText().trim();
+        String userName = userUsernameField.getText().trim();
+        String password = userPasswordField.getText().trim();
+
+        if (userId.isEmpty() || userName.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields are required!").show();
+            return;
+        }
+
+        String idPattern = "^[0-9]{3,6}$";
+        String usernamePattern = "^(?!.*[_.]{2})[a-zA-Z0-9][a-zA-Z0-9_.]{3,28}[a-zA-Z0-9]$";
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+
+        boolean isvalidId = userId.matches(idPattern);
+        boolean isvalidName = userName.matches(usernamePattern);
+        boolean isvalidPassword = password.matches(passwordPattern);
+
+        if (!isvalidId){
+            new Alert(Alert.AlertType.ERROR, "Invalid ID!").show();
+        } else if (!isvalidName) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!").show();
+        } else if (!isvalidPassword) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
+        }
+
+        if (isvalidId && isvalidName && isvalidPassword) {
+            UserDTO userDTO = new UserDTO(userId, userName, password);
+            userBO.save(userDTO);
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Successfully added user!").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "user added failed!").show();
+        }
     }
 
 
@@ -178,19 +224,40 @@ public class SettingController implements Initializable  {
     }
 
     @FXML
-    void searchUser(ActionEvent event) {
-        // Logic to search for a user
+    void searchUser(ActionEvent event) throws IOException {
+       String userId = userIdField.getText();
+       String userName = currentUsernameField.getText();
+       String userPassword = txtNewPasswordText.getText();
+
+        UserDTO userDTO = userBO.findCredential(userId);
+        if (userDTO != null){
+            userUsernameField.setText(userDTO.getUsername());
+            UserPasswordTextField.setVisible(false);
+            userPasswordField.setText(userDTO.getPassword());
+        }else{
+            new Alert(Alert.AlertType.ERROR, "user can not find").show();
+            refreshPage();
+        }
     }
 
     @FXML
     void showCurrentAdminUsername(ActionEvent event) {
-        // Logic to show the current admin username
+        // empty
     }
 
 
     @FXML
     void toggleUserPasswordVisibility(ActionEvent event) {
-//currentPasswordField.isVisible() ||
+
+        if(userPasswordField.isVisible()){
+            userPasswordField.setVisible(false);
+            UserPasswordTextField.setText(userPasswordField.getText());
+            UserPasswordTextField.setVisible(true);
+        }else{
+            UserPasswordTextField.setVisible(false);
+            userPasswordField.setText(UserPasswordTextField.getText());
+            userPasswordField.setVisible(true);
+        }
 
     }
 
@@ -241,8 +308,46 @@ public class SettingController implements Initializable  {
     }
 
     @FXML
-    void updateUser(ActionEvent event) {
-        // Add logic to update a user
+    void updateUser(ActionEvent event) throws IOException {
+        String userId = userIdField.getText().trim();
+        String userName = userUsernameField.getText().trim();
+        String password = userPasswordField.getText().trim();
+
+        if (userId.isEmpty() || userName.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields are required!").show();
+            return;
+        }
+
+        String idPattern = "^[a-zA-Z0-9]{3,6}$";
+        String usernamePattern = "^(?!.*[_.]{2})[a-zA-Z0-9][a-zA-Z0-9_.]{3,28}[a-zA-Z0-9]$";
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+        boolean isValidId = userId.matches(idPattern);
+        boolean isValidName = userName.matches(usernamePattern);
+        boolean isValidPassword = password.matches(passwordPattern);
+
+        if (!isValidId) {
+            new Alert(Alert.AlertType.ERROR, "Invalid ID!").show();
+            return;
+        }
+        if (!isValidName) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!").show();
+            return;
+        }
+        if (!isValidPassword) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
+            return;
+        }
+
+        if (isValidId && isValidName && isValidPassword) {
+            UserDTO userDTO = new UserDTO(userId, userName, password);
+            userBO.update(userDTO);
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Successfully updated user!").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "user updated failed!").show();
+        }
+
     }
 
     @FXML
@@ -252,8 +357,6 @@ public class SettingController implements Initializable  {
 
         txtNewPasswordText.setDisable(true);
         txtConfirmPasswordText.setDisable(true);
-
-        String usernameRegex = "^(?!.*[_.]{2})[a-zA-Z0-9][a-zA-Z0-9_.]{3,28}[a-zA-Z0-9]$";
 
         if (currentUsername.isEmpty()) {
             usernameErrorLabel.setText("Current username cannot be empty!");
@@ -265,7 +368,7 @@ public class SettingController implements Initializable  {
             return;
         }
 
-        if (!newUsername.matches(usernameRegex)) {
+        if (!isValidUsername(newUsername)) {
             usernameErrorLabel.setText("Invalid username! Username must be 5-30 characters long, can only contain letters, numbers, underscores (_), and dots (.), but cannot start/end with a special character or have consecutive dots/underscores.");
             return;
         }
@@ -284,4 +387,13 @@ public class SettingController implements Initializable  {
         }
 
     }
+
+    private boolean isValidUsername(String username) {
+        String usernameRegex = "^(?!.*[_.]{2})[a-zA-Z0-9][a-zA-Z0-9_.]{3,28}[a-zA-Z0-9]$";
+        return username.matches(usernameRegex);
+    }
+
+
 }
+
+

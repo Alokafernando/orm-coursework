@@ -44,7 +44,7 @@ public class UserBOImpl implements UserBO {
     public boolean save(UserDTO receptionistDTO) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
-        return userDAO.save(new User(receptionistDTO.getUserId(),receptionistDTO.getUsername(), receptionistDTO.getPassword()));
+        return  userDAO.save(new User(receptionistDTO.getUserId(), receptionistDTO.getUsername(), receptionistDTO.getPassword()));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserBOImpl implements UserBO {
     public boolean update(UserDTO userDTO) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
-        return userDAO.update(new User(userDTO.getUsername(), userDTO.getPassword(),userDTO.getUserId()));
+        return userDAO.update(new User(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword()));
     }
 
 

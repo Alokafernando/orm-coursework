@@ -53,21 +53,51 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User entity) {
+//        session = factory.getSession();
+//        try {
+//            User receptionist = session.get(User.class, entity);
+//            Transaction transaction = session.beginTransaction();
+//
+//            receptionist.setUserId(entity.getUserId());
+//            receptionist.setUsername(entity.getUsername());
+//            receptionist.setPassword(entity.getPassword());
+//
+//            transaction.commit();
+//            return receptionist != null;
+//        } catch (Exception e) {
+//            System.out.println("Receptionist update failed");
+//            return false;
+//        }
+
         session = factory.getSession();
+        Transaction transaction = null;
+
         try {
-            User receptionist = session.get(User.class, entity);
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
 
-            receptionist.setUsername(entity.getUsername());
-            receptionist.setPassword(entity.getPassword());
+            User existingUser = session.get(User.class, entity.getUserId());
 
+            if (existingUser != null) {
+                existingUser.setUsername(entity.getUsername());
+                existingUser.setPassword(entity.getPassword());
 
-            transaction.commit();
-            return receptionist != null;
+                session.update(existingUser);
+                transaction.commit();
+                return true;
+            } else {
+                System.out.println("User not found!");
+                return false;
+            }
         } catch (Exception e) {
-            System.out.println("Receptionist update failed");
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.out.println("User update failed: " + e.getMessage());
             return false;
+        } finally {
+            session.close();
         }
+
     }
 
     @Override
