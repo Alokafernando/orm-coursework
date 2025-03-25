@@ -21,69 +21,74 @@ public class AdminBOImpl implements AdminBO {
 
     @Override
     public List<AdminDTO> getAll() {
-        List<AdminDTO> adminDTOs = new ArrayList<>();
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            List<Admin> admins = adminDAO.getAll();
-            for (Admin admin : admins) {
-                adminDTOs.add(new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return adminDTOs;
+//        List<AdminDTO> adminDTOs = new ArrayList<>();
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            adminDAO.setSession(session);
+//            List<Admin> admins = adminDAO.getAll();
+//            for (Admin admin : admins) {
+//                adminDTOs.add(new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword()));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return adminDTOs;
+
+        return null;
     }
 
     @Override
     public boolean save(AdminDTO adminDTO) throws IOException {
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            return adminDAO.save(new Admin(adminDTO.getAdminId(), adminDTO.getUsername(), adminDTO.getPassword()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            adminDAO.setSession(session);
+//            return adminDAO.save(new Admin(adminDTO.getAdminId(), adminDTO.getUsername(), adminDTO.getPassword()));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+
+        return false;
     }
 
     @Override
     public AdminDTO find(String username) {
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            Admin admin = adminDAO.find(username);
-            if (admin != null) {
-                return new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            adminDAO.setSession(session);
+//            Admin admin = adminDAO.find(username);
+//            if (admin != null) {
+//                return new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 
     @Override
     public boolean update(AdminDTO adminDTO) throws IOException {
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            Admin existingAdmin = adminDAO.find(adminDTO.getUsername());
-
-            if (existingAdmin != null) {
-                existingAdmin.setPassword(adminDTO.getPassword());
-                return adminDAO.update(existingAdmin);
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            adminDAO.setSession(session);
+//            Admin existingAdmin = adminDAO.find(adminDTO.getUsername());
+//
+//            if (existingAdmin != null) {
+//                existingAdmin.setPassword(adminDTO.getPassword());
+//                return adminDAO.update(existingAdmin);
+//            }
+//            return false;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+        return false;
     }
 
     @Override
     public void delete(String username) {
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            adminDAO.delete(username);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            adminDAO.setSession(session);
+//            adminDAO.delete(username);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -112,17 +117,7 @@ public class AdminBOImpl implements AdminBO {
         return adminNames;
     }
 
-    @Override
-    public List<String> getAdminPasswords() throws IOException {
-        List<String> adminPasswords = new ArrayList<>();
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            adminPasswords = adminDAO.getAdminPasswords(); // Corrected method call
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return adminPasswords;
-    }
+
 
     @Override
     public boolean updateUsername(String currentUsername, String newUsername) throws IOException {

@@ -20,7 +20,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAll() {
-        return List.of();
+         session = factory.getSession();
+         List<User> users = session.createQuery("from User", User.class).list();
+        session.close();
+        return users;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class UserDAOImpl implements UserDAO {
 
             receptionist.setUsername(entity.getUsername());
             receptionist.setPassword(entity.getPassword());
+
 
             transaction.commit();
             return receptionist != null;

@@ -21,5 +21,5 @@ public interface UserBO extends SuperBO {
 
     UserDTO findCredential(String text) throws IOException;
 
-    boolean status();
+    String status();
 }

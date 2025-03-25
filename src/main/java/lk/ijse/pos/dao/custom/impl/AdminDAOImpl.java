@@ -109,17 +109,6 @@ public class AdminDAOImpl implements AdminDAO {
         return adminNames;
     }
 
-    @Override
-    public List<String> getAdminPasswords() {
-        List<String> adminPasswords = new ArrayList<>();
-        try (Session session = factory.getSession()) {
-            Query<String> query = session.createQuery("SELECT a.password FROM Admin a", String.class);
-            adminPasswords = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return adminPasswords;
-    }
 
     @Override
     public boolean updateUsername(String currentUsername, String newUsername) {

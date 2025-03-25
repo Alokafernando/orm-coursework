@@ -1,3 +1,4 @@
+
 package lk.ijse.pos.controller;
 
 import javafx.event.ActionEvent;
@@ -24,8 +25,6 @@ public class SettingController implements Initializable  {
     @FXML
     private Tab adminSettings;
 
-    @FXML
-    private Button clearFormBtn;
 
     @FXML
     private PasswordField confirmPasswordField;
@@ -79,9 +78,6 @@ public class SettingController implements Initializable  {
     private Button updateUserNameBtn1;
 
     @FXML
-    private TextField userEmailField;
-
-    @FXML
     private TextField userIdField;
 
     @FXML
@@ -89,12 +85,6 @@ public class SettingController implements Initializable  {
 
     @FXML
     private PasswordField userPasswordField;
-
-    @FXML
-    private TextField userPhoneField;
-
-    @FXML
-    private TextField userRoleField;
 
     @FXML
     private Label userSearchStatusLabel;
@@ -128,11 +118,14 @@ public class SettingController implements Initializable  {
         newUsernameField.setText("");
 
         txtNewPasswordText.setVisible(false);
-       txtConfirmPasswordText.setVisible(false);
+        txtConfirmPasswordText.setVisible(false);
 
         currentPasswordField.setText("");
         newPasswordField.setText("");
         confirmPasswordField.setText("");
+
+        usernameErrorLabel.setText("");
+        passwordErrorLabel.setText("");
     }
 
     private void showCurrentUserName() {
@@ -151,7 +144,6 @@ public class SettingController implements Initializable  {
 
     @FXML
     void PasswordVisibility(ActionEvent event) {
-
 
         if (newPasswordField.isVisible() || confirmPasswordField.isVisible()) {
             newPasswordField.setVisible(false);
@@ -179,10 +171,6 @@ public class SettingController implements Initializable  {
         // Add logic to add a new user
     }
 
-    @FXML
-    void clearUserForm(ActionEvent event) {
-        // Logic to clear the user form
-    }
 
     @FXML
     void deleteUser(ActionEvent event) {
@@ -205,7 +193,6 @@ public class SettingController implements Initializable  {
 //currentPasswordField.isVisible() ||
 
     }
-
 
 
     @FXML

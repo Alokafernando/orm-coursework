@@ -24,14 +24,27 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public List<UserDTO> getAll() {
-        return List.of();
+        /*
+         List<AdminDTO> adminDTOs = new ArrayList<>();
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            adminDAO.setSession(session);
+            List<Admin> admins = adminDAO.getAll();
+            for (Admin admin : admins) {
+                adminDTOs.add(new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return adminDTOs;
+         */
+        return null;
     }
 
     @Override
     public boolean save(UserDTO receptionistDTO) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
-        return userDAO.save(new User(receptionistDTO.getUsername(), receptionistDTO.getPassword()));
+        return userDAO.save(new User(receptionistDTO.getUserId(),receptionistDTO.getUsername(), receptionistDTO.getPassword()));
     }
 
     @Override
@@ -43,7 +56,7 @@ public class UserBOImpl implements UserBO {
     public boolean update(UserDTO userDTO) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         userDAO.setSession(session);
-        return userDAO.update(new User(userDTO.getUsername(), userDTO.getPassword()));
+        return userDAO.update(new User(userDTO.getUsername(), userDTO.getPassword(),userDTO.getUserId()));
     }
 
 
@@ -59,6 +72,7 @@ public class UserBOImpl implements UserBO {
         User user = userDAO.find(text);
         if (user !=null){
             return new UserDTO(
+                    user.getUserId(),
                     user.getUsername(),
                     user.getPassword()
             );
@@ -68,8 +82,7 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public boolean status() {
-        boolean isUser = true;
-        return isUser;
+    public String status() {
+        return "user";
     }
 }
