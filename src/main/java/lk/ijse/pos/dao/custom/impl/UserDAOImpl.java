@@ -115,5 +115,10 @@ public class UserDAOImpl implements UserDAO {
         this.session = session;
     }
 
+    @Override
+    public String generateNewID() {
+        return "";
+    }
+
 
 }
