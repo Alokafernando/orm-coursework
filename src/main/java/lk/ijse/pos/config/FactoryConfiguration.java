@@ -1,6 +1,7 @@
 package lk.ijse.pos.config;
 
 import lk.ijse.pos.entity.Admin;
+import lk.ijse.pos.entity.Theropist;
 import lk.ijse.pos.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +22,7 @@ public class FactoryConfiguration {
         Configuration configuration = new Configuration().setProperties(properties);
         configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Theropist.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }

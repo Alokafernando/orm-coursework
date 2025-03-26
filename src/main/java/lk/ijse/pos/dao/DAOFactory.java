@@ -2,6 +2,7 @@ package lk.ijse.pos.dao;
 
 
 import lk.ijse.pos.dao.custom.impl.AdminDAOImpl;
+import lk.ijse.pos.dao.custom.impl.TheropistDAOImpl;
 import lk.ijse.pos.dao.custom.impl.UserDAOImpl;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class DAOFactory {
         return daoFactory;
     }
     public enum DAOType {
-    ADMIN, USER;
+    ADMIN, USER, THEROPIST;
     }
     public SuperDAO getDAO(DAOType type) throws IOException {
         switch (type) {
@@ -26,6 +27,8 @@ public class DAOFactory {
                 return new AdminDAOImpl();
             case USER:
                 return new UserDAOImpl();
+            case THEROPIST:
+                return new TheropistDAOImpl();
             default:
                 return null;
         }

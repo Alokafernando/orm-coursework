@@ -59,7 +59,7 @@ public class AdminDAOImpl implements AdminDAO {
     public boolean update(Admin entity) {
         try (Session session = factory.getSession()) {
             Transaction transaction = session.beginTransaction();
-            Admin existingAdmin = session.get(Admin.class, entity.getUsername()); // Fetch by ID or username
+            Admin existingAdmin = session.get(Admin.class, entity.getUsername());
 
             if (existingAdmin != null) {
                 existingAdmin.setPassword(entity.getPassword());
