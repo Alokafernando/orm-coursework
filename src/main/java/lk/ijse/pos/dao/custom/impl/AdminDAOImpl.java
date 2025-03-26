@@ -98,6 +98,11 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public String generateNewID() {
+        return "";
+    }
+
+    @Override
     public List<String> getAdminNames() {
         List<String> adminNames = new ArrayList<>();
         try (Session session = factory.getSession()) {
