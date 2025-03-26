@@ -114,4 +114,6 @@ public class UserDAOImpl implements UserDAO {
     public void setSession(Session session) {
         this.session = session;
     }
+
+
 }

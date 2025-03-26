@@ -17,5 +17,6 @@ public interface CrudDAO<T> extends SuperDAO {
 
     void setSession(Session session);
 
+    String generateNewID();
 
 }
