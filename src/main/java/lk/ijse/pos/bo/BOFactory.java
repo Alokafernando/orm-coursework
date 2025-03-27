@@ -2,8 +2,8 @@ package lk.ijse.pos.bo;
 
 
 import lk.ijse.pos.bo.custom.impl.AdminBOImpl;
+import lk.ijse.pos.bo.custom.impl.TherapistBOImpl;
 import lk.ijse.pos.bo.custom.impl.UserBOImpl;
-import lk.ijse.pos.dao.custom.impl.UserDAOImpl;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class BOFactory {
         return boFactory;
     }
     public enum BOType {
-        ADMIN, USER;
+        ADMIN, USER, THEROPIST;
     }
     public SuperBO getBO(BOType type) throws IOException {
         switch (type) {
@@ -27,6 +27,8 @@ public class BOFactory {
                 return new AdminBOImpl();
             case USER:
                 return new UserBOImpl();
+            case THEROPIST:
+                return new TherapistBOImpl();
             default:
                 return null;
         }

@@ -1,8 +1,9 @@
 package lk.ijse.pos.dao.custom.impl;
 
 import lk.ijse.pos.config.FactoryConfiguration;
-import lk.ijse.pos.dao.custom.TheropistDAO;
-import lk.ijse.pos.entity.Theropist;
+import lk.ijse.pos.dao.custom.TherapistDAO;
+import lk.ijse.pos.entity.Therapist;
+import lk.ijse.pos.tm.TherapistTM;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -10,27 +11,28 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.util.List;
 
-public class TheropistDAOImpl implements TheropistDAO {
+public class TherapistDAOImpl implements TherapistDAO {
 
     FactoryConfiguration factory;
     private Session session;
 
-    public TheropistDAOImpl() throws IOException {
+    public TherapistDAOImpl() throws IOException {
         factory = FactoryConfiguration.getInstance();
     }
 
     @Override
-    public List<Theropist> getAll() {
+    public List<Therapist> getAll() {
         session = factory.getSession();
-        List<Theropist> theropists = session.createQuery("from Theropist").list();
+        List<Therapist> therapists = session.createQuery("from Therapist").list();
         session.close();
-        return theropists;
+        return therapists;
     }
 
     @Override
-    public boolean save(Theropist entity) {
+    public boolean save(Therapist entity) {
+        Session session = factory.getSession();
         try{
-            Session session = factory.getSession();
+
             Transaction transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
@@ -38,32 +40,40 @@ public class TheropistDAOImpl implements TheropistDAO {
         }catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally {
+            if (session!=null) session.close();
         }
+
     }
 
     @Override
-    public Theropist find(String id) {
+    public Therapist find(String text) {
+        return null;
+    }
+
+    @Override
+    public TherapistTM findTheropist(String id) {
         session = factory.getSession();
-        Theropist theropist = session.get(Theropist.class, id);
-        return theropist;
+        TherapistTM therapist = session.get(TherapistTM.class, id);
+        return therapist;
     }
 
     @Override
-    public boolean update(Theropist entity) {
+    public boolean update(Therapist entity) {
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
 
-            Theropist existingTheropist = session.get(Theropist.class, entity.getTheropistId());
+            Therapist existingTherapist = session.get(Therapist.class, entity.getTherapistId());
 
-            if (existingTheropist != null) {
-                existingTheropist.setName(entity.getName());
-                existingTheropist.setContact(entity.getContact());
-                existingTheropist.setEmail(entity.getEmail());
-                existingTheropist.setStatus(entity.getStatus());
+            if (existingTherapist != null) {
+                existingTherapist.setName(entity.getName());
+                existingTherapist.setContact(entity.getContact());
+                existingTherapist.setEmail(entity.getEmail());
+                existingTherapist.setStatus(entity.getStatus());
 
-                session.update(existingTheropist);
+                session.update(existingTherapist);
                 transaction.commit();
                 return true;
             } else {
@@ -89,7 +99,7 @@ public class TheropistDAOImpl implements TheropistDAO {
         try {
             transaction = session.beginTransaction();
 
-            Theropist theropist = session.get(Theropist.class, id);
+            Therapist theropist = session.get(Therapist.class, id);
             if (theropist != null) {
                 session.delete(theropist);
                 transaction.commit();
@@ -116,7 +126,7 @@ public class TheropistDAOImpl implements TheropistDAO {
     public String generateNewID() {
         try (
                Session session = factory.getSession()) {
-            String hql = "SELECT t.id FROM Theropist t ORDER BY t.id DESC";
+            String hql = "SELECT t.id FROM Therapist t ORDER BY t.id DESC";
             Query<String> query = session.createQuery(hql, String.class);
             query.setMaxResults(1);
             String lastID = query.uniqueResult();

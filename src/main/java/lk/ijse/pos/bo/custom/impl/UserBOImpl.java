@@ -24,19 +24,6 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public List<UserDTO> getAll() {
-        /*
-         List<AdminDTO> adminDTOs = new ArrayList<>();
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            adminDAO.setSession(session);
-            List<Admin> admins = adminDAO.getAll();
-            for (Admin admin : admins) {
-                adminDTOs.add(new AdminDTO(admin.getAdminId(), admin.getUsername(), admin.getPassword()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return adminDTOs;
-         */
         return null;
     }
 

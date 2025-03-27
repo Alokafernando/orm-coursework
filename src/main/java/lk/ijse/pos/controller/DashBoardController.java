@@ -55,7 +55,6 @@ public class DashBoardController {
         Scene scene = ((Node) event.getSource()).getScene();
         scene.setRoot(root);
 
-
     }
 
     @FXML
@@ -79,8 +78,8 @@ public class DashBoardController {
     }
 
     @FXML
-    void btnTherapistsOnAction(ActionEvent event) {
-
+    void btnTherapistsOnAction(ActionEvent event) throws IOException {
+        getFilePath("/view/Therapist.fxml");
     }
 
     @FXML
@@ -111,6 +110,9 @@ public class DashBoardController {
 //    }
 
     private void getFilePath(String filePath) throws IOException {
+
+        System.out.println("Loading FXML file from path: " + filePath);
+
         Node content = contentPanel.getContent();
 
         if (content != null && content instanceof Pane) {
@@ -118,6 +120,7 @@ public class DashBoardController {
             pane.getChildren().clear();
         }
         Parent root = FXMLLoader.load(getClass().getResource(filePath));
+
         contentPanel.setContent(root);
     }
 

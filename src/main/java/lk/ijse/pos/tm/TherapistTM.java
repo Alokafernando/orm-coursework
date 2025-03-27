@@ -1,4 +1,4 @@
-package lk.ijse.pos.model;
+package lk.ijse.pos.tm;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class TheropistDTO {
+
+public class TherapistTM {
     private String theropistId;
 
     private String name;

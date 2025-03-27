@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="theropistPanel" fitToHeight="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.TherapistController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="800.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Therapist Management">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="503.0" prefWidth="650.0" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label minWidth="100" text="Therapist ID">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txttherapistId" alignment="CENTER" editable="false" prefWidth="250.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-background-color: transparent;" text="001" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label minWidth="100" text="Name">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtName" prefWidth="250.0" promptText="name" style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-background-color: transparent;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label minWidth="100" text="Contact">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtContact" prefWidth="250.0" promptText="0751111111" style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-background-color: transparent;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label minWidth="100" text="Email">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtEmail" prefWidth="250.0" promptText="youremail@gmail.com" style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-background-color: transparent;" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label minWidth="100" text="Status">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rbActive" mnemonicParsing="false" text="active">
+                                 <padding>
+                                    <Insets right="30.0" />
+                                 </padding>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="statusBtnGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbInActive" mnemonicParsing="false" text="in-active" toggleGroup="$statusBtnGroup" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="40.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="btnAddTheropist" onAction="#btnAddTherapistOnAction" prefWidth="75.0" text="Add" />
+                              <Button fx:id="btnUpdateTheropist" onAction="#btnUpdateTherapistOnAction" prefWidth="75.0" text="Update" />
+                              <Button fx:id="btnDeleteTheropist" onAction="#btnDeleteTherapistOnAction" prefWidth="75.0" text="Delete" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="250.0" prefWidth="700.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="700.0">
+                                 <children>
+                                    <TableView fx:id="tblTheropist" onMouseClicked="#tblTherapistOnAction" prefHeight="236.0" prefWidth="629.0">
+                                       <columns>
+                                          <TableColumn fx:id="colTherapistId" prefWidth="98.39998662471771" text="Therapist ID" />
+                                          <TableColumn fx:id="colName" prefWidth="136.80001831054688" text="Name" />
+                                          <TableColumn fx:id="colContact" prefWidth="131.20001220703125" text="Contact" />
+                                          <TableColumn fx:id="colEmail" prefWidth="152.0" text="Email" />
+                                          <TableColumn fx:id="colStatuts" prefWidth="110.4000244140625" text="Status" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

@@ -16,11 +16,100 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adminPanel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.UserLoginController">
+<AnchorPane fx:id="adminPanel" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.pos.controller.UserLoginController">
    <children>
       <BorderPane layoutX="1.0" prefHeight="600.0" prefWidth="800.0">
-         <left>
-            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #3498db;">
+         <right>
+            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="50.0" left="75.0" right="75.0" top="50.0" />
+               </padding>
+               <children>
+                  <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="299.0">
+                     <children>
+                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#navigateToSelectPanel">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+
+                        <Label text="Log In" textFill="#3498db">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Please enter your credentials" textFill="#7f8c8d">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+
+                        <!-- Username Field -->
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #f4f6f7; -fx-background-radius: 5;">
+                     <children>
+                        <TextField fx:id="txtUsername" prefHeight="40.0" prefWidth="220.0" promptText="Username" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+
+                        <!-- Password Field with Toggle -->
+                  <StackPane alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="206.0" style="-fx-background-color: #f4f6f7; -fx-background-radius: 5;">
+                     <children>
+                        <PasswordField fx:id="txtPassword" prefHeight="40.0" prefWidth="264.0" promptText="Password" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="txtPasswordText" prefHeight="40.0" prefWidth="251.0" promptText="Password" style="-fx-background-color: transparent;" visible="false" />
+                        <Button fx:id="btnTogglePassword" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#togglePasswordVisibility" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fx:id="imgEyeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/open-eye.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </StackPane>
+
+                        <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <CheckBox fx:id="chkRememberMe" text="Remember me" textFill="#7f8c8d">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+
+                        <Label fx:id="lblError" textFill="RED" wrapText="true">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+
+                        <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;" text="LOGIN" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #3498db;" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -48,95 +137,6 @@
                         <Insets left="40.0" right="40.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-               </children>
-            </VBox>
-         </left>
-         <center>
-            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: white;">
-               <padding>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </padding>
-               <children>
-                  <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="299.0">
-                     <children>
-                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#navigateToSelectPanel">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/images/logout.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-
-                  <Label text="Log In" textFill="#3498db">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label text="Please enter your credentials" textFill="#7f8c8d">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-
-                  <!-- Username Field -->
-                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #f4f6f7; -fx-background-radius: 5;">
-                     <children>
-                        <TextField fx:id="txtUsername" prefHeight="40.0" prefWidth="220.0" promptText="Username" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-
-                  <!-- Password Field with Toggle -->
-                  <StackPane alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="206.0" style="-fx-background-color: #f4f6f7; -fx-background-radius: 5;">
-                     <children>
-                        <PasswordField fx:id="txtPassword" prefHeight="40.0" prefWidth="264.0" promptText="Password" style="-fx-background-color: transparent;" />
-                        <TextField fx:id="txtPasswordText" prefHeight="40.0" prefWidth="251.0" promptText="Password" style="-fx-background-color: transparent;" visible="false" />
-                        <Button fx:id="btnTogglePassword" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#togglePasswordVisibility" style="-fx-background-color: transparent;">
-                           <graphic>
-                              <ImageView fx:id="imgEyeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/images/open-eye.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </children>
-                  </StackPane>
-
-                  <HBox alignment="CENTER_RIGHT">
-                     <children>
-                        <CheckBox fx:id="chkRememberMe" text="Remember me" textFill="#7f8c8d">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </CheckBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-
-                  <Label fx:id="lblError" textFill="RED" wrapText="true">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-
-                  <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;" text="LOGIN" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </VBox>
          </center>
