@@ -30,7 +30,7 @@
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <VBox prefHeight="503.0" prefWidth="650.0" spacing="15.0">
+                  <VBox prefHeight="503.0" prefWidth="650.0" spacing="25.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
                            <children>
@@ -95,6 +95,7 @@
                               <Button fx:id="btnAddTheropist" onAction="#btnAddTherapistOnAction" prefWidth="75.0" text="Add" />
                               <Button fx:id="btnUpdateTheropist" onAction="#btnUpdateTherapistOnAction" prefWidth="75.0" text="Update" />
                               <Button fx:id="btnDeleteTheropist" onAction="#btnDeleteTherapistOnAction" prefWidth="75.0" text="Delete" />
+                              <Button fx:id="btnReport" layoutX="452.0" layoutY="10.0" onAction="#GenerateReport" prefWidth="75.0" text="Report" />
                            </children>
                         </HBox>
                         <HBox prefHeight="250.0" prefWidth="700.0">

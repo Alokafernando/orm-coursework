@@ -61,9 +61,12 @@ public class TherapistDAOImpl implements TherapistDAO {
     @Override
     public boolean update(Therapist entity) {
         Transaction transaction = null;
+        Session session = factory.getSession();
 
         try {
             transaction = session.beginTransaction();
+
+            System.out.println("Looking for therapist ID: " + entity.getTherapistId());
 
             Therapist existingTherapist = session.get(Therapist.class, entity.getTherapistId());
 
@@ -77,17 +80,19 @@ public class TherapistDAOImpl implements TherapistDAO {
                 transaction.commit();
                 return true;
             } else {
-                System.out.println("theropist not found!");
+                System.out.println("Therapist not found!");
                 return false;
             }
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("theropist update failed: " + e.getMessage());
+            e.printStackTrace();
             return false;
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
